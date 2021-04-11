@@ -1,0 +1,38 @@
+
+
+.pages{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+}
+
+.page{
+    margin: 10px;
+    background-color: #e9e9e9;
+    color: black;
+    padding : 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: .5px solid black;
+    width: 70px;
+    height: 70px;
+    text-align: center;
+    &:hover{
+        background-color: rgba(255, 192, 203, 0.795);
+        cursor: pointer;
+    }
+}
+
+h4{
+    display: flex;
+    justify-content: center
+}
+
+.part{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+}
