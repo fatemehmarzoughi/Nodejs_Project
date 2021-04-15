@@ -1,3 +1,4 @@
+const bcrypt = require('bcrypt');
 const express = require('express');
 const router = express.Router();
 const path = require('path');
@@ -33,18 +34,21 @@ router.post('/submit' , async (req , res ) => {
     if(user) return res.status(400).send('username already exists');
 
     //hash the password
+    const salt = await bcrypt.genSalt(10);
+    const hash = await bcrypt.hash(password , salt);
 
     //insert to the db
     user = await new Users({
         name ,
         username ,
         email ,
-        password ,
+        password : hash ,
         phone ,
     });
 
     await user.save();
 
+    //take the users to their dashboard
     res.sendFile(path.join(__dirname+'/pages/dashboard/dashboard.html'));
 
 })
