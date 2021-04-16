@@ -19,12 +19,14 @@
   "homepage": "https://github.com/fatemehmarzoughi/Nodejs_Project#readme",
   "dependencies": {
     "bcrypt": "^5.0.1",
+    "config": "^3.3.6",
     "express": "^4.17.1",
     "fs": "*",
     "joi": "^13.1.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.12.3",
     "nodemon": "^2.0.7",
-    "path": "^0.12.7"
+    "path": "^0.12.7",
+    "pug": "^3.0.2"
   }
 }

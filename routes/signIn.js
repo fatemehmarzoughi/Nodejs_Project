@@ -22,16 +22,22 @@ router.post('/submit' , async (req , res ) => {
     let phone = req.body.phone;
 
     //check if the password field matches the repeat password field or not
-    if(password != rewritePassword) return res.send('passwords does not match!');
+    if(password != rewritePassword) return res.render(path.join(__dirname+'/pages/signIn/signIn.pug') , {
+        errorMessages : 'passwords not match',
+    });
 
     //check their validation
-    const result = userValidation();
-    if (result.error) res.status(400).send(result.error.details[0].message);
+    const result = userValidation(req.body);
+    if (result.error) return res.render(path.join(__dirname+'/pages/signIn/signIn.pug') , {
+        errorMessages : result.error.details[0].message,
+    });
 
     //check if the user has login before or not
     let user = await Users
             .findOne({username});
-    if(user) return res.status(400).send('username already exists');
+    if(user) return res.render(path.join(__dirname+'/pages/signIn/signIn.pug') , {
+        errorMessages : 'This username already exists',
+    });
 
     //hash the password
     const salt = await bcrypt.genSalt(10);
@@ -48,9 +54,8 @@ router.post('/submit' , async (req , res ) => {
 
     await user.save();
 
-    //take the users to their dashboard
-    res.sendFile(path.join(__dirname+'/pages/dashboard/dashboard.html'));
-
+    //take the users to the login page
+    res.redirect('/logIn')
 })
 
 module.exports = router;

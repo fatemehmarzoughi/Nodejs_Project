@@ -34,8 +34,6 @@ const validation = (input) => {
 
 router.post('/submit' , async (req , res) => {
 
-    console.log('first part')
-    
     //get values from the user
     console.log(req.body)
     const username = req.body.username;
@@ -43,25 +41,27 @@ router.post('/submit' , async (req , res) => {
 
     //check user's inputs validation
     const error = validation(req.body);
-    if(error) return res.status(400).send(error.details[0].message); 
-    console.log('third part')
+    if(error) return res.render(path.join(__dirname + '/pages/logIn/logIn.pug') , {
+        errorMessages : error.details[0].message,
+    })
 
     //search for the entered username in the db
     const user = await Users.findOne({username});
-    if(!user) return res.status(400).send('user not found');
-    console.log('fourth part')
+    if(!user) return res.render(path.join(__dirname + '/pages/logIn/logIn.pug') , {
+        errorMessages : 'user not found',
+    })
 
     //check if the password is valid or not(dehash)
     const validPass = await bcrypt.compare(password , user.password);
-    if(!validPass) return res.status(400).send('wrong password');
-    console.log('fifth part');
+    if(!validPass) return res.render(path.join(__dirname + '/pages/logIn/logIn.pug') , {
+        errorMessages : 'wrong password',
+    })
 
     //generate the token and send it to the header
     const token = user.generateAuthToken();
-    res.header('x-auth-token' , token).send(user.username);
 
     //send the user's dashboard
-    // res.redirect();
+    res.redirect(`/dashboard/${token}`);
 })
 
 module.exports = router;
