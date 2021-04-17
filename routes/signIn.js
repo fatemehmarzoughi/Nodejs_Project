@@ -7,8 +7,7 @@ const {Users , userValidation} = require('../model/signIn');
 
 router.get('/' , (req , res ) =>{
     //the content of the page
-    res.sendFile(path.join(__dirname+'/pages/signIn/signIn.html'))
-
+    res.render(path.join(__dirname + '/pages/signIn/signIn.pug') , {});
 })
 
 router.post('/submit' , async (req , res ) => {
@@ -20,7 +19,9 @@ router.post('/submit' , async (req , res ) => {
     let rewritePassword = req.body.rewritePassword;
     let email = req.body.email;
     let phone = req.body.phone;
+    let isAdmin = (req.body.isAdmin != undefined) ? true : false;
 
+    console.log(`isAdmin = ${isAdmin}`);
     //check if the password field matches the repeat password field or not
     if(password != rewritePassword) return res.render(path.join(__dirname+'/pages/signIn/signIn.pug') , {
         errorMessages : 'passwords not match',
@@ -50,6 +51,7 @@ router.post('/submit' , async (req , res ) => {
         email ,
         password : hash ,
         phone ,
+        isAdmin,
     });
 
     await user.save();

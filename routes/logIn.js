@@ -56,12 +56,23 @@ router.post('/submit' , async (req , res) => {
     if(!validPass) return res.render(path.join(__dirname + '/pages/logIn/logIn.pug') , {
         errorMessages : 'wrong password',
     })
-
-    //generate the token and send it to the header
+    
+    //generate the token and send it to the header        
     const token = user.generateAuthToken();
 
-    //send the user's dashboard
-    res.redirect(`/dashboard/${token}`);
+    
+    //check if the user is admin or not and returnn diffrent dashboards for admins and normal users
+    if(user.isAdmin) 
+    {
+        //send the admin's dashboard
+        res.redirect(`/dashboardAdmin/${token}`);
+    }
+    else
+    {
+        //send the user's dashboard
+        res.redirect(`/dashboard/${token}`);
+    }
+
 })
 
 module.exports = router;

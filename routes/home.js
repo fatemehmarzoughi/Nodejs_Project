@@ -1,11 +1,16 @@
+const mongoose = require('mongoose');
+const { Product } = require('../model/product');
 const express = require('express');
 const router = express.Router();
 const path = require('path');
 
-router.get('/' , (req , res ) =>{
+router.get('/' , async (req , res ) =>{
 
-    res.sendFile(path.join(__dirname+'/pages/home/index.html'))
+    const product = await Product.find();
 
+    res.render(path.join(__dirname + '/pages/home/index.pug') , {
+        newProduct :  `${product[0].name} , ${product[0].price}`
+    })
 })
 
 module.exports = router;

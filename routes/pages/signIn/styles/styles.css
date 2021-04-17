@@ -38,4 +38,8 @@ form .submit {
 form .errorMessages {
   color: red;
 }
+
+form #isAdmin {
+  width: auto;
+}
 /*# sourceMappingURL=styles.css.map */

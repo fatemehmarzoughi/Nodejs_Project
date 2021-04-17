@@ -15,4 +15,6 @@ form(method='POST' action='/signIn/submit')
   input(name='rewritePassword' type='password' placeholder='repeat your password')
   input(name='email' type='email' placeholder='email')
   input(name='phone' type='tel' placeholder='phone number')
+  input#isAdmin(type='checkbox' name='isAdmin' value='true')
+  label(for='isAdmin')  sign in as admin?
   input.submit(name='submit' type='submit' value='Sign in')

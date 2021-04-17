@@ -26,8 +26,8 @@
       -ms-flex-pack: center;
           justify-content: center;
   border: .5px solid black;
-  width: 70px;
-  height: 70px;
+  width: 60px;
+  height: 10px;
   text-align: center;
 }
 
@@ -45,16 +45,15 @@ h4 {
           justify-content: center;
 }
 
-.part {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  margin: auto;
+.part .product {
+  float: right;
+  margin-right: 20px;
+  border: .5px solid black;
+  width: 110px;
+  background-color: #e9e9e9;
+  color: black;
+  padding: 15px;
+  font-size: 15px;
+  text-align: center;
 }
 /*# sourceMappingURL=style.css.map */

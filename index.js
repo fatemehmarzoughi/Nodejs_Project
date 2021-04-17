@@ -1,3 +1,5 @@
+const config = require('config');
+const dashboardAdmin = require('./routes/dashboardAdmin');
 const dashboard = require('./routes/dashboard');
 const signIn = require('./routes/signIn');
 const logIn = require('./routes/logIn');
@@ -24,8 +26,9 @@ app.use('/' , home);
 app.use('/signIn' , signIn);
 app.use('/logIn' , logIn);
 app.use('/dashboard' , dashboard);
+app.use('/dashboardAdmin' , dashboardAdmin);
 
-mongoose.connect('mongodb://localhost/users')
+mongoose.connect(config.get('mongodb'))
      .then(() => console.log('connect'))
      .catch((err) => console.log(err));
 

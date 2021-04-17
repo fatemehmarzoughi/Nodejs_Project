@@ -1,3 +1,4 @@
 {
-    "jwtPrivateKey" : ""
+    "jwtPrivateKey" : "",
+    "mongodb" : "mongodb://localhost/myShop"
 }

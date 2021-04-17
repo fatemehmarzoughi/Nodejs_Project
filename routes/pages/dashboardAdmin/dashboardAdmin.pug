@@ -1,0 +1,15 @@
+doctype html
+head
+  meta(charset='utf-8')
+  meta(http-equiv='X-UA-Compatible' content='IE=edge')
+  title= title
+  meta(name='viewport' content='width=device-width, initial-scale=1')
+  link(rel='stylesheet' type='text/css' media='screen' href='/pages/dashboardAdmin/styles/style.css')
+  script(src='main.js')
+h4= header
+h5= 'Add product form'
+b= errorMessages
+form(method='POST' action='/dashboardadmin/:id/addProduct')
+  input(name='name' placeholder='product name' type='text')
+  input(name='price' placeholder='product price' type='number')
+  input(name='submit' value='Add' type='submit')
