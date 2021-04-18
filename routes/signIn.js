@@ -19,7 +19,7 @@ router.post('/submit' , async (req , res ) => {
     let rewritePassword = req.body.rewritePassword;
     let email = req.body.email;
     let phone = req.body.phone;
-    let isAdmin = (req.body.isAdmin != undefined) ? true : false;
+    let isAdmin = (req.body.isAdmin == undefined) ? false : true;
 
     console.log(`isAdmin = ${isAdmin}`);
     //check if the password field matches the repeat password field or not

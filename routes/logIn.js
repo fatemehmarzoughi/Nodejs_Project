@@ -1,3 +1,4 @@
+const header = require('../model/headers')
 const Joi = require('joi');
 const bcrypt = require('bcrypt');
 const {Users} = require('../model/signIn')
@@ -59,18 +60,19 @@ router.post('/submit' , async (req , res) => {
     
     //generate the token and send it to the header        
     const token = user.generateAuthToken();
+    header.set('authToken' , token);
 
     
     //check if the user is admin or not and returnn diffrent dashboards for admins and normal users
     if(user.isAdmin) 
     {
         //send the admin's dashboard
-        res.redirect(`/dashboardAdmin/${token}`);
+        res.redirect(`/dashboardAdmin`);
     }
     else
     {
         //send the user's dashboard
-        res.redirect(`/dashboard/${token}`);
+        res.redirect(`/dashboard`);
     }
 
 })

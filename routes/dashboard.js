@@ -4,7 +4,7 @@ const auth = require('../middleware/auth')
 const express = require('express');
 const router = express.Router();
 
-router.get('/:token' , auth , async (req , res) => {
+router.get('/' , auth , async (req , res) => {
 
     const { _id } = req.user;
     const user = await Users.findById(_id);

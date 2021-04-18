@@ -31,7 +31,6 @@ const usersSchema = new mongoose.Schema({
     },
     isAdmin : {
         type : Boolean,
-        required : true,
     }
 })
 
@@ -51,7 +50,7 @@ const userValidation = (input) => {
         password : Joi.string().min(5).max(100).required(),
         email : Joi.string().email().required(),
         phone : Joi.number().required(),
-        isAdmin : Joi.boolean().required(),
+        isAdmin : Joi.boolean(),
     }
 
     const userInput = {

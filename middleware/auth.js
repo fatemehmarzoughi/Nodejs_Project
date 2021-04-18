@@ -1,8 +1,11 @@
+const header = require('../model/headers');
 const jwt = require('jsonwebtoken');
 const config = require('config');
 
 function auth(req , res , next) {
-    const token = req.params.token;
+    
+    const token = header.get('authToken');
+
     if(!token) return res.status(401).send('Access denied');
 
     try{

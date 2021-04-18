@@ -9,7 +9,7 @@ router.get('/' , async (req , res ) =>{
     const product = await Product.find();
 
     res.render(path.join(__dirname + '/pages/home/index.pug') , {
-        newProduct :  `${product[0].name} , ${product[0].price}`
+        newProduct :  product,
     })
 })
 
