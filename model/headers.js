@@ -1,6 +1,10 @@
 const fetch = require('cross-fetch');
-const header = new fetch.Headers();
-header.append('authToken');
+
+// async function setHeader() {
+    const header = new fetch.Headers();
+    header.append('authToken');
+    header.append('deletedProductId');
+// }
 
 
 module.exports = header;

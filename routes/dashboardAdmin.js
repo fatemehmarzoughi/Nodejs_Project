@@ -1,3 +1,4 @@
+const header = require('../model/headers');
 const mongoose = require('mongoose');
 const auth = require('../middleware/auth')
 const { productValidation , Product } = require('../model/product');
@@ -30,37 +31,57 @@ route.post('/addProduct' ,auth, async (req , res) => {
     await user.save();
 
     res.render(path.join(__dirname + '/pages/dashboardAdmin/dashboardAdmin.pug') , {
-        errorMessages : 'the product added succefuly',
+        successMessages : 'the product added succefuly',
     })
 })
 
-route.get('/find' ,auth , async (req , res) => {
-    console.log(req.body);
+route.post('/find' ,auth , async (req , res) => {
+
     // check the id validation
     const result = await mongoose.Types.ObjectId.isValid(req.body.productId);
     if(!result) res.render(path.join(__dirname + "/pages/dashboardAdmin/dashboardAdmin.pug") , {
         errorMessageDelete : 'invalid id number!',
     });
-    console.log(req.body.productId)
 
     //check if the id exists or not
     const product = await Product.findById(req.body.productId);
     if(!product) res.render(path.join(__dirname + "/pages/dashboardAdmin/dashboardAdmin.pug") , {
         errorMessageDelete : 'product not found!',
     })
-    console.log(req.body.productId)
 
-    res.render(path.join(__dirname + '/pages/dashboardAdmin/dashboardAdmin.pug') , {
-        display : 'block',
-        name : product.name,
-        price : product.price,
-        id : product._id,
-    })
+    await header.set('deletedProductId' , product._id);
+
+    if(req.body.submit === 'delete')
+    {
+        res.render(path.join(__dirname + '/pages/dashboardAdmin/dashboardAdmin.pug') , {
+            display : 'display : block',
+            name : product.name,
+            price : product.price,
+            id : product._id,
+        })
+    }
+    else
+    {
+        console.log('founded for update end point')
+    }
 
 })
 
-route.delete('/deleteProduct' , (req , res) => {
-    
+route.post('/find/deleteProduct' , async (req , res) => {
+    if(req.body.submit === 'Yes')
+    {
+       await Product.deleteOne({_id : header.get('deletedProductId')});
+       res.render(path.join(__dirname + '/pages/dashboardAdmin/dashboardAdmin.pug') , {
+          display : 'display : none',
+          successMessageDelete : 'the product deleted successfully'
+       })
+    }
+    else
+    {
+        res.render(path.join(__dirname + '/pages/dashboardAdmin/dashboardAdmin.pug') , {
+            display : 'display : none',
+        })
+    }
 })
 
 module.exports = route;

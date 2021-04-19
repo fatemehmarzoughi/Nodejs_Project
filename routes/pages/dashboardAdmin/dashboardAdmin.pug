@@ -8,22 +8,45 @@ head
   script(src='main.js')
 h4= header
 h5= 'Add product form'
+h6(style='color : green')= successMessages
 h6= errorMessages
 form(method='POST' action='/dashboardadmin/addProduct')
   input(name='name' placeholder='product name' type='text')
   input(name='price' placeholder='product price' type='number')
   input(name='submit' value='Add' type='submit')
 h5= 'Delete product form'
+h6(style='color : green')= successMessageDelete
 h6= errorMessageDelete
-form(method='GET' action='/dashboardAdmin/find')
+form(method='POST' action='/dashboardAdmin/find')
   input(name='productId' placeholder='product id' type='text')
   input(name='submit' value='delete' type='submit')
 //- each value in newProduct
-.product(style='display : #{display}')
+display= none
+.product(style=display + ';width : 50%; float:left')
   h5= 'founded product'
-  p Are you sure , you want to delete this product?
-  b name : #{name}
-  b price : #{price}
   b id : #{id}
-  a(href='/dashboardAdmin/find/delete') Yes
-  a(href='/dashboardAdmin') No
+  br
+  b name : #{name}
+  br
+  b price : #{price}
+  br
+  form(method='POST' action='/dashboardAdmin/find/deleteProduct')
+    h5 Are you sure, you want to delete this product?
+    input(type='submit' value='Yes' name='submit')
+    input(type='submit' value='No' name='submit')
+
+h5= 'Update product form'
+h6(style='color : green')= successMessageUpdate
+h6= errorMessageUpdate
+form(method='POST' action='/dashboardAdmin/find')
+  input(name='productId' placeholder='product id' type='text')
+  input(name='submit' value='update' type='submit')
+//- each value in newProduct
+displayUpdate= none
+.product(style=displayUpdate + ';width : 50%; float:left')
+  h5= 'founded product'
+  form(method='POST' action='/dashboardAdmin/find/updateProduct')
+    input(name='id' placeholder=id type='text')
+    input(name='name' placeholder=name type='text')
+    input(name='price' placeholder=price type='text')
+    input(name='submit' value='update' type='text')
