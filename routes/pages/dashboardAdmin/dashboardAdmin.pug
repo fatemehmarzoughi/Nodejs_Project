@@ -11,14 +11,14 @@ h5= 'Add product form'
 h6(style='color : green')= successMessages
 h6= errorMessages
 form(method='POST' action='/dashboardadmin/addProduct')
-  input(name='name' placeholder='product name' type='text')
-  input(name='price' placeholder='product price' type='number')
+  input(name='name' placeholder='product name' type='text' required)
+  input(name='price' placeholder='product price' type='number' required)
   input(name='submit' value='Add' type='submit')
 h5= 'Delete product form'
 h6(style='color : green')= successMessageDelete
 h6= errorMessageDelete
 form(method='POST' action='/dashboardAdmin/find')
-  input(name='productId' placeholder='product id' type='text')
+  input(name='productId' placeholder='product id' type='text' required)
   input(name='submit' value='delete' type='submit')
 //- each value in newProduct
 display= none
@@ -39,14 +39,18 @@ h5= 'Update product form'
 h6(style='color : green')= successMessageUpdate
 h6= errorMessageUpdate
 form(method='POST' action='/dashboardAdmin/find')
-  input(name='productId' placeholder='product id' type='text')
+  input(name='productId' placeholder='product id' type='text' required)
   input(name='submit' value='update' type='submit')
 //- each value in newProduct
 displayUpdate= none
 .product(style=displayUpdate + ';width : 50%; float:left')
-  h5= 'founded product'
+  h5= 'founded product. Insert new Values'
   form(method='POST' action='/dashboardAdmin/find/updateProduct')
-    input(name='id' placeholder=id type='text')
-    input(name='name' placeholder=name type='text')
-    input(name='price' placeholder=price type='text')
-    input(name='submit' value='update' type='text')
+    label name : 
+    input(name='name' placeholder=nameUpdate type='text' required)
+    br
+    label price : 
+    input(name='price' placeholder=priceUpdate type='text' required)
+    br
+    input(name='submit' value='update' type='submit')
+    input(name='submit' value='cancel' type='submit')

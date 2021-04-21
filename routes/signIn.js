@@ -2,7 +2,7 @@ const bcrypt = require('bcrypt');
 const express = require('express');
 const router = express.Router();
 const path = require('path');
-const {Users , userValidation} = require('../model/signIn');
+const {Users , userValidation} = require('../model/user');
 
 
 router.get('/' , (req , res ) =>{

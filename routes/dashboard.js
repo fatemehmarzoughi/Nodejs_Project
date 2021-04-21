@@ -1,4 +1,4 @@
-const { Users } = require('../model/signIn');
+const { Users } = require('../model/user');
 const path = require('path');
 const auth = require('../middleware/auth')
 const express = require('express');

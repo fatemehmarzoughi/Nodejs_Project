@@ -49,7 +49,7 @@ route.post('/find' ,auth , async (req , res) => {
         errorMessageDelete : 'product not found!',
     })
 
-    await header.set('deletedProductId' , product._id);
+    header.set('foundedProductId' , await product._id);
 
     if(req.body.submit === 'delete')
     {
@@ -62,7 +62,12 @@ route.post('/find' ,auth , async (req , res) => {
     }
     else
     {
-        console.log('founded for update end point')
+        res.render(path.join(__dirname + '/pages/dashboardAdmin/dashboardAdmin.pug') , {
+            displayUpdate : 'display : block',
+            nameUpdate : product.name,
+            priceUpdate : product.price,
+            idUpdate : product._id,
+        })
     }
 
 })
@@ -70,7 +75,7 @@ route.post('/find' ,auth , async (req , res) => {
 route.post('/find/deleteProduct' , async (req , res) => {
     if(req.body.submit === 'Yes')
     {
-       await Product.deleteOne({_id : header.get('deletedProductId')});
+       await Product.deleteOne({_id : header.get('foundedProductId')});
        res.render(path.join(__dirname + '/pages/dashboardAdmin/dashboardAdmin.pug') , {
           display : 'display : none',
           successMessageDelete : 'the product deleted successfully'
@@ -80,6 +85,39 @@ route.post('/find/deleteProduct' , async (req , res) => {
     {
         res.render(path.join(__dirname + '/pages/dashboardAdmin/dashboardAdmin.pug') , {
             display : 'display : none',
+        })
+    }
+})
+
+route.post('/find/updateProduct' , async (req , res) => {
+
+    if(req.body.submit === 'update')
+    {
+        const foundedId = await header.get('foundedProductId');
+
+        //check the input validation
+        const result = productValidation(req.body);
+        if(result.error) res.render(path.join(__dirname + '/pages/dashboardAdmin/dashboardAdmin.pug') , {
+            errorMessageUpdate : 'invalid inputs',
+        })
+
+        await Product.updateOne({_id : foundedId} , {
+            $set : {
+                name : req.body.name,
+                price : req.body.price,
+            }
+        }, {new : true});
+
+        res.render(path.join(__dirname + '/pages/dashboardAdmin/dashboardAdmin.pug') , {
+            successMessageUpdate : 'updated successfuly',
+            // displayUpdate : 'display : none',
+        })        
+    }
+    else
+    {
+        res.render(path.join(__dirname + '/pages/dashboardAdmin/dashboardAdmin.pug') , {
+            errorMessageUpdate : 'canceled',
+            // displayUpdate : 'display : none',
         })
     }
 })
