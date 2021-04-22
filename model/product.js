@@ -30,5 +30,6 @@ const productValidation = (input) => {
     return Joi.validate(userInput , schema);
 }
 
+module.exports.productSchema = productSchema;
 module.exports.Product = Product;
 module.exports.productValidation = productValidation;

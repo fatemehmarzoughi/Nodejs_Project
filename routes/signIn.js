@@ -7,7 +7,7 @@ const {Users , userValidation} = require('../model/user');
 
 router.get('/' , (req , res ) =>{
     //the content of the page
-    res.render(path.join(__dirname + '/pages/signIn/signIn.pug') , {});
+    res.render(path.join(__dirname + '/../pages/signIn/signIn.pug') , {});
 })
 
 router.post('/submit' , async (req , res ) => {
@@ -23,20 +23,20 @@ router.post('/submit' , async (req , res ) => {
 
     console.log(`isAdmin = ${isAdmin}`);
     //check if the password field matches the repeat password field or not
-    if(password != rewritePassword) return res.render(path.join(__dirname+'/pages/signIn/signIn.pug') , {
+    if(password != rewritePassword) return res.render(path.join(__dirname+'/../pages/signIn/signIn.pug') , {
         errorMessages : 'passwords not match',
     });
 
     //check their validation
     const result = userValidation(req.body);
-    if (result.error) return res.render(path.join(__dirname+'/pages/signIn/signIn.pug') , {
+    if (result.error) return res.render(path.join(__dirname+'/../pages/signIn/signIn.pug') , {
         errorMessages : result.error.details[0].message,
     });
 
     //check if the user has login before or not
     let user = await Users
             .findOne({username});
-    if(user) return res.render(path.join(__dirname+'/pages/signIn/signIn.pug') , {
+    if(user) return res.render(path.join(__dirname+'/../pages/signIn/signIn.pug') , {
         errorMessages : 'This username already exists',
     });
 

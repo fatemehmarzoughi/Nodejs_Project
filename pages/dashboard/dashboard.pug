@@ -1,0 +1,16 @@
+doctype html
+head
+  meta(charset='utf-8')
+  meta(http-equiv='X-UA-Compatible' content='IE=edge')
+  title= title
+  meta(name='viewport' content='width=device-width, initial-scale=1')
+  link(rel='stylesheet' type='text/css' media='screen' href='/dashboard/styles/style.css')
+  script(src='main.js')
+h4= header
+.part
+  h5 My card
+  each value in myCard
+    div.product
+      b &#x646;&#x627;&#x645; &#x645;&#x62D;&#x635;&#x648;&#x644; : #{value.name}
+      p &#x642;&#x6CC;&#x645;&#x62A; &#x645;&#x62D;&#x635;&#x648;&#x644; #{value.price}
+      //- a(href='/logIn/buy/' + value.id) &#x62E;&#x631;&#x6CC;&#x62F;

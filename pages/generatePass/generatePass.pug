@@ -1,0 +1,15 @@
+doctype html
+head
+  meta(charset='utf-8')
+  meta(http-equiv='X-UA-Compatible' content='IE=edge')
+  title Page Title
+  meta(name='viewport' content='width=device-width, initial-scale=1')
+  link(rel='stylesheet' type='text/css' media='screen' href='/emailVerify/styles/style.css')
+  script(src='main.js')
+h4 generate Password
+form(style=displayGeneratePassForm method='post' action='/logIn/forgotPass/send/verify/generate' )
+  h6=successMessage
+  h5=errorMessage
+  input(type='password' name='password' placeholder='password')
+  input(type='password' name='rewritePassword' placeholder='rewrite_password')
+  input(class='submit' type='submit' name='submit' value='change')

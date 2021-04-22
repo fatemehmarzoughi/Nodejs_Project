@@ -8,7 +8,7 @@ router.get('/' , async (req , res ) =>{
 
     const product = await Product.find();
 
-    res.render(path.join(__dirname + '/pages/home/index.pug') , {
+    res.render(path.join(__dirname + '/../pages/home/index.pug') , {
         newProduct :  product,
     })
 })

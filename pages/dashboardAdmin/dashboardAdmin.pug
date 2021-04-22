@@ -1,0 +1,56 @@
+doctype html
+head
+  meta(charset='utf-8')
+  meta(http-equiv='X-UA-Compatible' content='IE=edge')
+  title= title
+  meta(name='viewport' content='width=device-width, initial-scale=1')
+  link(rel='stylesheet' type='text/css' media='screen' href='/dashboardAdmin/styles/style.css')
+  script(src='main.js')
+h4= header
+h5= 'Add product form'
+h6(style='color : green')= successMessages
+h6= errorMessages
+form(method='POST' action='/dashboardadmin/addProduct')
+  input(name='name' placeholder='product name' type='text' required)
+  input(name='price' placeholder='product price' type='number' required)
+  input(name='submit' value='Add' type='submit')
+h5= 'Delete product form'
+h6(style='color : green')= successMessageDelete
+h6= errorMessageDelete
+form(method='POST' action='/dashboardAdmin/find')
+  input(name='productId' placeholder='product id' type='text' required)
+  input(name='submit' value='delete' type='submit')
+//- each value in newProduct
+display= none
+.product(style=display + ';width : 50%; float:left')
+  h5= 'founded product'
+  b id : #{id}
+  br
+  b name : #{name}
+  br
+  b price : #{price}
+  br
+  form(method='POST' action='/dashboardAdmin/find/deleteProduct')
+    h5 Are you sure, you want to delete this product?
+    input(type='submit' value='Yes' name='submit')
+    input(type='submit' value='No' name='submit')
+
+h5= 'Update product form'
+h6(style='color : green')= successMessageUpdate
+h6= errorMessageUpdate
+form(method='POST' action='/dashboardAdmin/find')
+  input(name='productId' placeholder='product id' type='text' required)
+  input(name='submit' value='update' type='submit')
+//- each value in newProduct
+displayUpdate= none
+.product(style=displayUpdate + ';width : 50%; float:left')
+  h5= 'founded product. Insert new Values'
+  form(method='POST' action='/dashboardAdmin/find/updateProduct')
+    label name : 
+    input(name='name' placeholder=nameUpdate type='text' required)
+    br
+    label price : 
+    input(name='price' placeholder=priceUpdate type='text' required)
+    br
+    input(name='submit' value='update' type='submit')
+    input(name='submit' value='cancel' type='submit')

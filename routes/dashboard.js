@@ -11,11 +11,11 @@ router.get('/' , auth , async (req , res) => {
     
     // use ajax to send data from express to html
 
-    res.render(path.join(__dirname , '/pages/dashboard/dashboard.pug') , {
+    res.render(path.join(__dirname , '/../pages/dashboard/dashboard.pug') , {
         title : 'hello',
         header : `welcome ${user.name}`,
     })
-    // res.sendFile(path.join(__dirname , '/pages/dashboard/dashboard.html'));
+    // res.sendFile(path.join(__dirname , '/../pages/dashboard/dashboard.html'));
 
 })
 

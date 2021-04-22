@@ -1,0 +1,19 @@
+body{
+    background-color: #e9e9e9;
+}
+
+.part{
+    .product{
+        float : right;
+        margin-right: 20px;
+        border-radius: 10px;
+        width: 110px;
+        height: 110px;
+        background-color: rgba(255, 255, 255, 0.795);
+        color: black;
+        padding: 15px;
+        font-size: 15px;
+        text-align: center;
+        box-shadow: 10px 10px 15px #cbced1, -5px -5px 15px #fff;
+    }
+}

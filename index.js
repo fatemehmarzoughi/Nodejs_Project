@@ -1,3 +1,4 @@
+require('express-async-errors');
 const config = require('config');
 const dashboardAdmin = require('./routes/dashboardAdmin');
 const dashboard = require('./routes/dashboard');
@@ -9,7 +10,8 @@ const express = require('express');
 const app = express();
 
 //for accessing to the static files
-app.use(express.static('routes'));
+// app.use(express.static('routes'));
+app.use(express.static('pages'));
 
 //for accessing to the form fields
 app.use(express.urlencoded({

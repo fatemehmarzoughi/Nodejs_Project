@@ -1,12 +1,13 @@
 const header = require('../model/headers');
 const jwt = require('jsonwebtoken');
 const config = require('config');
+const path = require('path');
 
 function auth(req , res , next) {
     
     const token = header.get('authToken');
 
-    if(!token) return res.status(401).send('Access denied');
+    if(!token) return res.render(path.join(__dirname + '/../pages/logIn/logIn.pug'));
 
     try{
         const decoded = jwt.verify(token , '1234' ); //config.get('jwtPrivateKey')
@@ -14,7 +15,8 @@ function auth(req , res , next) {
         next();
     }
     catch(err){
-        res.status(400).send('invalid token');
+        return res.render(path.join(__dirname + '/../pages/logIn/logIn.pug'))
+        // res.status(400).send('invalid token');
     }
 }
 

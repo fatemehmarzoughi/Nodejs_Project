@@ -1,0 +1,21 @@
+doctype html
+head
+  meta(charset='utf-8')
+  meta(http-equiv='X-UA-Compatible' content='IE=edge')
+  title Page Title
+  meta(name='viewport' content='width=device-width, initial-scale=1')
+  link(rel='stylesheet' type='text/css' media='screen' href='/logIn/styles/style.css')
+  script(src='main.js')
+h4 Log in
+form(method='POST' action='/logIn/submit')
+  label.errorMessages= errorMessages
+  input(name='username' type='text' placeholder='username')
+  input(name='password' type='password' placeholder='password')
+  input.submit(name='submit' type='submit' value='Log in')
+  br
+  br
+  a(href='/signIn') Not registered yet?
+  br
+  a(href='/logIn/forgotPass')
+    | Forgot password?
+    a

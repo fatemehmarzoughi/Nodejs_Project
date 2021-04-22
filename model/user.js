@@ -1,3 +1,4 @@
+const { productSchema } = require('../model/product')
 const jwt = require('jsonwebtoken');
 const mongoose = require('mongoose');
 const Joi = require('joi')
@@ -31,7 +32,8 @@ const usersSchema = new mongoose.Schema({
     },
     isAdmin : {
         type : Boolean,
-    }
+    },
+    boughtProducts : [ productSchema ],
 })
 
 usersSchema.methods.generateAuthToken = function(){

@@ -1,0 +1,15 @@
+doctype html
+head
+  meta(charset='utf-8')
+  meta(http-equiv='X-UA-Compatible' content='IE=edge')
+  title Page Title
+  meta(name='viewport' content='width=device-width, initial-scale=1')
+  link(rel='stylesheet' type='text/css' media='screen' href='/forgotPass/styles/style.css')
+  script(src='main.js')
+h4 Forgot Password
+form(method='POST' action='/logIn/forgotPass/send')
+  h6=successMessage
+  h5=errorMessage
+  p A code will be send to your email address
+  input(type='text' name='username' placeholder='username')
+  input.submit(type='submit' name='submit' value='send')
