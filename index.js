@@ -6,6 +6,7 @@ const app = express();
 require('./startup/error')();
 require('./startup/routes')(app);
 require('./startup/db')();
+require('./startup/production')(app);
 // require('./startup/config')();
 
 

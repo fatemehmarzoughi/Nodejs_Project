@@ -4,7 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest --watchAll --coverage"
+    "test": "jest --watchAll --coverage",
+    "start" : "node index.js"
+  },
+  "engines": {
+    "node" : "14.16.0"
   },
   "repository": {
     "type": "git",
@@ -19,12 +23,14 @@
   "homepage": "https://github.com/fatemehmarzoughi/Nodejs_Project#readme",
   "dependencies": {
     "bcrypt": "^5.0.1",
+    "compression": "^1.7.4",
     "config": "^3.3.6",
     "cross-fetch": "^3.1.4",
     "express": "^4.17.1",
     "express-async-errors": "^3.1.1",
     "fawn": "^2.1.5",
     "fs": "*",
+    "helmet": "^4.5.0",
     "joi": "^13.1.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.12.3",
