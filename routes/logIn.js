@@ -1,3 +1,4 @@
+const { handleError } = require('../middleware/errorHandler');
 const { Product } = require('../model/product');
 const transport = require('../model/mailer');
 const auth = require('../middleware/auth')
@@ -25,7 +26,7 @@ router.get('/forgotPass' , (req , res ) =>{
     
 })
 
-router.post('/forgotPass/send' , async (req , res) => {
+router.post('/forgotPass/send' , handleError(async (req , res) => {
     const username = req.body.username;
 
     //search in db and check if the user exists or not
@@ -57,7 +58,7 @@ router.post('/forgotPass/send' , async (req , res) => {
         return res.render(path.join(__dirname + '/../pages/emailVerify/emailVerify.pug'));
     })
 
-})
+}))
 
 router.post('/forgotPass/send/verify' , (req , res) => {
 
@@ -73,7 +74,7 @@ router.post('/forgotPass/send/verify' , (req , res) => {
 
 })
 
-router.post('/forgotPass/send/verify/generate' , passwordAuth, async (req , res) => {
+router.post('/forgotPass/send/verify/generate' , passwordAuth, handleError(async (req , res) => {
 
     if(req.body.password !== req.body.rewritePassword)
       return res.render(path.join(__dirname + '/../pages/generatePass/generatePass.pug') , {
@@ -98,12 +99,11 @@ router.post('/forgotPass/send/verify/generate' , passwordAuth, async (req , res)
         errorMessages : 'password changed successfuly',
     })
 
-})
+}))
 
-router.post('/submit' , async (req , res) => {
+router.post('/submit' , handleError(async (req , res) => {
 
     //get values from the user
-    console.log(req.body)
     const username = req.body.username;
     const password = req.body.password;
 
@@ -142,27 +142,37 @@ router.post('/submit' , async (req , res) => {
         res.redirect(`/dashboard`);
     }
 
-})
+}))
 
-router.get('/buy/:id' , auth, async (req , res) => {
+router.get('/buy/:id' , auth, handleError(async (req , res) => {
 
     const user = await Users.findOne({ _id : req.user._id })
     if(!user) return res.status(401).send('sth went wrong');
     
     const _id = req.params.id;
-    console.log(_id);
     const product = await Product.findById({ _id })
     if(!product) return res.status(401).send('invalid id');
-    console.log(product);
+
     //insert the product to the user's card
     const result = await user.boughtProducts.push(product);
+    await user.save();
     if(!result) return res.status(401).send('sth went wrong');
 
-    const products = user.boughtProducts;
-    res.render(path.join(__dirname + '/../pages/dashboard/dashboard.pug') , {
-        myCard : products,
-    })
+    res.redirect(`/dashboard`);
 
-})
+}))
+
+router.get('/remove/:id' , auth, handleError(async (req , res) => {
+
+    const user = await Users.findOne({ _id : req.user._id });
+    if(!user) return res.status(401).send('sth went wrong');
+    
+    const product = await user.boughtProducts.id(req.params.id);
+    await product.remove();
+    await user.save();
+
+    res.redirect(`/dashboard`);
+
+}))
 
 module.exports = router;

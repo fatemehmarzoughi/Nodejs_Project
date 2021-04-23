@@ -15,6 +15,6 @@ h4  Home page
   h4 List of products : 
   each value in newProduct
     div.product
-      b &#x646;&#x627;&#x645; &#x645;&#x62D;&#x635;&#x648;&#x644; : #{value.name}
-      p &#x642;&#x6CC;&#x645;&#x62A; &#x645;&#x62D;&#x635;&#x648;&#x644; #{value.price}
-      a(href='/logIn/buy/' + value.id) &#x62E;&#x631;&#x6CC;&#x62F;
+      b #{value.name}
+      p price : #{value.price}$
+      a(href='/logIn/buy/' + value.id) Add to card

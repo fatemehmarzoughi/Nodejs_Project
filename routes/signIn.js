@@ -1,8 +1,9 @@
+const { handleError } = require('../middleware/errorHandler');
 const bcrypt = require('bcrypt');
 const express = require('express');
 const router = express.Router();
 const path = require('path');
-const {Users , userValidation} = require('../model/user');
+const { Users, userValidation } = require('../model/user');
 
 
 router.get('/' , (req , res ) =>{
@@ -10,7 +11,7 @@ router.get('/' , (req , res ) =>{
     res.render(path.join(__dirname + '/../pages/signIn/signIn.pug') , {});
 })
 
-router.post('/submit' , async (req , res ) => {
+router.post('/submit' , handleError(async (req , res ) => {
 
     //get values
     let name = req.body.name;
@@ -58,6 +59,6 @@ router.post('/submit' , async (req , res ) => {
 
     //take the users to the login page
     res.redirect('/logIn')
-})
+}))
 
 module.exports = router;

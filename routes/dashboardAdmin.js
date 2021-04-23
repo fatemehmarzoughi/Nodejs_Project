@@ -1,3 +1,4 @@
+const { handleError } = require('../middleware/errorHandler');
 const header = require('../model/headers');
 const mongoose = require('mongoose');
 const auth = require('../middleware/auth')
@@ -13,7 +14,7 @@ route.get('/' , auth, (req , res) => {
     });
 })
 
-route.post('/addProduct' ,auth, async (req , res) => {
+route.post('/addProduct' ,auth, handleError(async (req , res) => {
     let name = req.body.name;
     let price = req.body.price;
 
@@ -33,9 +34,9 @@ route.post('/addProduct' ,auth, async (req , res) => {
     res.render(path.join(__dirname + '/../pages/dashboardAdmin/dashboardAdmin.pug') , {
         successMessages : 'the product added succefuly',
     })
-})
+}))
 
-route.post('/find' ,auth , async (req , res) => {
+route.post('/find' ,auth , handleError(async (req , res) => {
 
     // check the id validation
     const result = await mongoose.Types.ObjectId.isValid(req.body.productId);
@@ -70,9 +71,9 @@ route.post('/find' ,auth , async (req , res) => {
         })
     }
 
-})
+}))
 
-route.post('/find/deleteProduct' , async (req , res) => {
+route.post('/find/deleteProduct' , handleError(async (req , res) => {
     if(req.body.submit === 'Yes')
     {
        await Product.deleteOne({_id : header.get('foundedProductId')});
@@ -87,9 +88,9 @@ route.post('/find/deleteProduct' , async (req , res) => {
             display : 'display : none',
         })
     }
-})
+}))
 
-route.post('/find/updateProduct' , async (req , res) => {
+route.post('/find/updateProduct' , handleError(async (req , res) => {
 
     if(req.body.submit === 'update')
     {
@@ -120,6 +121,6 @@ route.post('/find/updateProduct' , async (req , res) => {
             // displayUpdate : 'display : none',
         })
     }
-})
+}))
 
 module.exports = route;

@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest --watchAll --coverage"
   },
   "repository": {
     "type": "git",
@@ -32,6 +32,10 @@
     "nodemon": "^2.0.7",
     "path": "^0.12.7",
     "pug": "^3.0.2",
-    "random": "^3.0.5"
+    "random": "^3.0.5",
+    "winston": "^2.4.0"
+  },
+  "devDependencies": {
+    "jest": "^26.6.3"
   }
 }
